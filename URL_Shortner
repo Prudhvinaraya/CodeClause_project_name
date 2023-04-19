@@ -1,0 +1,31 @@
+import string
+import random
+
+class URLShortener:
+    def __init__(self):
+        self.url_to_code = {}
+        self.code_to_url = {}
+        self.allowed_chars = string.ascii_letters + string.digits
+    
+    def shorten_url(self, url):
+        if url in self.url_to_code:
+            return self.url_to_code[url]
+        else:
+            code = self._generate_code()
+            self.url_to_code[url] = code
+            self.code_to_url[code] = url
+            return code
+    
+    def expand_url(self, code):
+        return self.code_to_url.get(code, None)
+    
+    def _generate_code(self, length=6):
+        while True:
+            code = ''.join(random.choice(self.allowed_chars) for _ in range(length))
+            if code not in self.code_to_url:
+                return code
+x=URLShortener();
+y=x.shorten_url("https://infyspringboard.onwingspan.com/web/en/app/search/learning?lang=en&q=knolskape&f=%7B%7D")
+z=x.expand_url(y)
+print(z)
+x._generate_code()
