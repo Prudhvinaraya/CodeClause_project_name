@@ -1,6 +1,5 @@
 import string
 import random
-
 class URLShortener:
     def __init__(self):
         self.url_to_code = {}
